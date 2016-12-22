@@ -106,7 +106,7 @@ exports.handler = function(event, context, callback)
     var srcBucket = event.Records[0].s3.bucket.name;
     var srcKey = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));
     var outputKey = srcKey + ".mp3";
-    var s3url = "https://s3.amazonaws.com/" + srcBucket + "/" + outputKey.replace(' ', '+');
+    var s3url = "https://s3.amazonaws.com/" + srcBucket + "/" + outputKey.replace(/\s/g, '+');
     
     // Read the audio metadata this will not be preserved by the elastic transcoder
     S3.getObject( { 
@@ -134,7 +134,7 @@ exports.handler = function(event, context, callback)
                     var title = preprocessName(metadata.title);
                     var artist = preprocessName(metadata.artist.length > 0 ? metadata.artist[0] : "");
                     var album = preprocessName(metadata.album);
-                    var trackNum = trackPattern.exec(metadata.track.no);
+                    var trackNum = trackPattern.exec(metadata.track.no)[0];
                     
                     var fileData = {
                         metadata: metadata,
