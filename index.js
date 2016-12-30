@@ -13,6 +13,17 @@ function preprocessName(origName)
 {
     var processedName = "";
     origName = origName.toLowerCase();
+    
+    // Replace ampersand with 'and' and numbers with spellings
+    origName = origName.replace( /\s&\s/g, "and" );
+    origName = origName.replace( /^first|\sfirst/g, "1st" );
+    origName = origName.replace( /^third|\sthird/g, "3rd" );
+    origName = origName.replace( /^fourth|\sfourth/g, "4th" );
+    origName = origName.replace( /^fifth|\sfifth/g, "5th" );
+    origName = origName.replace( /^sixth|\ssixth/g, "6th" );
+    origName = origName.replace( /^seventh|\sseventh/g, "7th" );
+    origName = origName.replace( /^eighth|\seighth/g, "8th" );
+    
     for ( var i = 0; i < origName.length; i++ )
     {
         var charStr = origName.charAt(i);
