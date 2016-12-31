@@ -14,6 +14,11 @@ function preprocessName(origName)
     var processedName = "";
     origName = origName.toLowerCase();
     
+    if (origName.match(/^the\s/))
+    {
+        origName = origName.substring(3);
+    }
+    
     // Replace ampersand with 'and' and numbers with spellings
     origName = origName.replace( /\s&\s/g, "and" );
     origName = origName.replace( /^first|\sfirst/g, "1st" );
